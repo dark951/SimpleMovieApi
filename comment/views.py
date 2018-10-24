@@ -17,13 +17,7 @@ class CommentsView(ModelViewSet):
 
     @staticmethod
     def perform_create(movie_id, text):
-        comment = Comment.objects.create(
-            movie_id=movie_id,
-            text=text
-        )
-        comment.save()
-
-        return comment
+        return Comment.objects.create(movie_id=movie_id, text=text)
 
     def create(self, request, *args, **kwargs):
         movie_id = request.data.get('movie_id')

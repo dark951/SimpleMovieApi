@@ -58,8 +58,7 @@ class MoviesView(ModelViewSet):
         movie = self.perform_create(movie_data)
 
         return Response(
-            self.serializer_class(movie).data,
-            status=status.HTTP_201_CREATED
+            self.get_serializer(movie).data, status=status.HTTP_201_CREATED
         )
 
 

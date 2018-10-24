@@ -4,8 +4,8 @@ from django.test import TestCase
 from rest_framework import status
 from rest_framework.test import APIRequestFactory
 
-from movie.models import Movie
 from comment.models import Comment
+from movie.models import Movie
 from movie.views import TopView
 
 factory = APIRequestFactory()
@@ -15,26 +15,21 @@ class TopViewSetTest(TestCase):
 
     def setUp(self):
         self.movie_1 = Movie.objects.create(
-            title='test 1',
-            data={'test_data': 'test_value'}
+            title='test 1', data={'test_data': 'test_value'}
         )
         self.movie_2 = Movie.objects.create(
-            title='test 2',
-            data={'test_data': 'test_value'}
+            title='test 2', data={'test_data': 'test_value'}
         )
 
         Comment.objects.bulk_create([
             Comment(
-                movie=self.movie_1,
-                text='test text 1',
+                movie=self.movie_1, text='test text 1',
             ),
             Comment(
-                movie=self.movie_2,
-                text='test text 2',
+                movie=self.movie_2, text='test text 2',
             ),
             Comment(
-                movie=self.movie_2,
-                text='test text 2',
+                movie=self.movie_2, text='test text 2',
             )
         ])
         Comment.objects.all().update(created_at=datetime.date(2000, 6, 6))

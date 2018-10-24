@@ -44,7 +44,7 @@ INSTALLED_APPS = [
 
     # Project apps.
     'movie',
-    'comment'
+    'comment',
 ]
 
 MIDDLEWARE = [

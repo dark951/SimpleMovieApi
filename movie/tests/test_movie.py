@@ -157,14 +157,8 @@ class MoviesViewSetTest(TestCase):
 
     @property
     def get_view(self):
-        view = MoviesView.as_view({
-            'get': 'list'
-        })
-        return view
+        return MoviesView.as_view({'get': 'list'})
 
     @property
     def post_view(self):
-        view = MoviesView.as_view({
-            'post': 'create'
-        })
-        return view
+        return MoviesView.as_view({'post': 'create'})
