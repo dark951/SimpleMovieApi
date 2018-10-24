@@ -39,7 +39,7 @@ class MoviesView(ModelViewSet):
         if not title:
             return Response(
                 {'Error': 'Movie title not provided.'},
-                status=status.HTTP_204_NO_CONTENT
+                status=status.HTTP_400_BAD_REQUEST
             )
 
         movie_data = get_movie_data(title)
@@ -65,11 +65,10 @@ class MoviesView(ModelViewSet):
 
 class TopView(APIView):
 
+    @staticmethod
     def get_movie_ids_with_comment_count(start_date, end_date):
-        date_format = '%Y-%m-%dT%H:%M:%S.%fZ'
         movie_ids_form_comments = Comment.objects.filter(
-            created_at__gte=datetime.datetime.strptime(start_date, date_format),
-            created_at__lte=datetime.datetime.strptime(end_date, date_format)
+            created_at__gte=start_date, created_at__lte=end_date
         ).values_list('movie_id', flat=True)
 
         return sorted(
@@ -85,7 +84,20 @@ class TopView(APIView):
         if not (start_date and end_date):
             return Response(
                 {'Error': 'Start and end dates are required.'},
-                status=status.HTTP_201_CREATED
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        try:
+            date_format = '%Y-%m-%d'
+            start_date = datetime.datetime.strptime(start_date, date_format)
+            end_date = datetime.datetime.strptime(end_date, date_format)
+        except ValueError:
+            return Response(
+                {
+                    'Error': 'Required dates format YEAR-MONTH-DAY '
+                    'Example: 2020-09-14'
+                },
+                status=status.HTTP_400_BAD_REQUEST
             )
 
         response_data = []

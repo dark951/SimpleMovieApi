@@ -32,7 +32,7 @@ class CommentsView(ModelViewSet):
         if not (text and movie_id):
             return Response(
                 {'Error': 'Movie id or comment text not provided.'},
-                status=status.HTTP_204_NO_CONTENT
+                status=status.HTTP_400_BAD_REQUEST
             )
         elif not Movie.objects.filter(id=movie_id).exists():
             return Response(

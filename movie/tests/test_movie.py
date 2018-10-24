@@ -2,7 +2,7 @@ import mock
 
 from django.test import TestCase
 from rest_framework import status
-from rest_framework.test import APIRequestFactory, force_authenticate
+from rest_framework.test import APIRequestFactory
 
 from movie.models import Movie
 from movie.views import MoviesView
@@ -40,7 +40,7 @@ class MoviesViewSetTest(TestCase):
         response = self.get_view(request)
 
         self.assertEquals(response.status_code, status.HTTP_200_OK)
-        self.assertEquals(
+        self.assertListEqual(
             response.data, [
                 {'title': 'test', 'data': {'test_data': 'test_value'}}
             ]
@@ -52,7 +52,7 @@ class MoviesViewSetTest(TestCase):
         response = self.get_view(request)
 
         self.assertEquals(response.status_code, status.HTTP_200_OK)
-        self.assertEquals(response.data, [])
+        self.assertListEqual(response.data, [])
 
     def test_get_many_results(self):
         Movie.objects.bulk_create(self.movies)
@@ -74,7 +74,7 @@ class MoviesViewSetTest(TestCase):
         response = self.get_view(request)
 
         self.assertEquals(response.status_code, status.HTTP_200_OK)
-        self.assertEquals(
+        self.assertListEqual(
             response.data, [
                 {'title': 'test', 'data': {'test_data': 'test_value'}}
             ]
@@ -94,7 +94,7 @@ class MoviesViewSetTest(TestCase):
         response = self.get_view(request)
 
         self.assertEquals(response.status_code, status.HTTP_200_OK)
-        self.assertEquals(
+        self.assertListEqual(
             response.data, [
                 {'title': 'test', 'data': {'test_data': 'test_value'}},
                 {'title': 'title1', 'data': {
@@ -129,7 +129,7 @@ class MoviesViewSetTest(TestCase):
         response = self.post_view(request)
 
         self.assertFalse(Movie.objects.all().exists())
-        self.assertEquals(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertEquals(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertDictEqual(
             response.data, {'Error': 'Movie title not provided.'}
         )
