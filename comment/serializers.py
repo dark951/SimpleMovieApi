@@ -1,4 +1,5 @@
 from rest_framework import serializers
+
 from comment.models import Comment
 
 
@@ -12,6 +13,8 @@ class CommentsSerializer(serializers.Serializer):
         representation = super(
             CommentsSerializer, self
         ).to_representation(instance)
+
         representation['text'] = instance.text
         representation['movie_id'] = instance.movie_id
+
         return representation

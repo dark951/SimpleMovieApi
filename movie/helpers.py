@@ -1,5 +1,6 @@
-from requests import get, exceptions
 import json
+from requests import get, exceptions
+
 from movie.models import MOVIE_DATA_SOURCE
 from SimpleMovieApi.settings import OMDBAPI_API_KEY
 

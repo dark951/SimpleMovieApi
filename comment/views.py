@@ -1,11 +1,12 @@
-from rest_framework.viewsets import ModelViewSet
-from rest_framework.response import Response
-from rest_framework.parsers import JSONParser
 from rest_framework import status
-from movie.models import Movie
+from rest_framework.parsers import JSONParser
+from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet
+
+from comment.filters import CommentsFilter
 from comment.models import Comment
 from comment.serializers import CommentsSerializer
-from comment.filters import CommentsFilter
+from movie.models import Movie
 
 
 class CommentsView(ModelViewSet):

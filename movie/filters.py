@@ -1,7 +1,8 @@
-from rest_framework.filters import BaseFilterBackend
 from functools import reduce
 from operator import or_
+
 from django.db.models import Q
+from rest_framework.filters import BaseFilterBackend
 
 
 class MoviesFilter(BaseFilterBackend):
