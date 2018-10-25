@@ -26,7 +26,7 @@ SECRET_KEY = 'earxr5a&==c5%mm(0@damt(h4uo(szndls_eq6zly7r%@6ioeg'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['simplemovieapi.herokuapp.com', '127.0.0.1']
 
 APPEND_SLASH = False
 
