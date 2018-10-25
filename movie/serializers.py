@@ -9,9 +9,7 @@ class MoviesSerializer(serializers.Serializer):
         model = Movie
 
     def to_representation(self, instance):
-        representation = super(
-            MoviesSerializer, self
-        ).to_representation(instance)
+        representation = super().to_representation(instance)
 
         representation['title'] = instance.title
         representation['data'] = instance.data

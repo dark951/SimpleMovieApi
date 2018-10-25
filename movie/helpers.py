@@ -2,13 +2,13 @@ import json
 from requests import get, exceptions
 
 from movie.models import MOVIE_DATA_SOURCE
-from SimpleMovieApi.settings import OMDBAPI_API_KEY
+from django.conf import settings
 
 
 def get_movie_data(title):
     try:
         return get(
-            f'{MOVIE_DATA_SOURCE}/?t={title}&apikey={OMDBAPI_API_KEY}',
+            f'{MOVIE_DATA_SOURCE}/?t={title}&apikey={settings.OMDBAPI_API_KEY}',
             timeout=10
         ).json()
     except exceptions.ConnectionError:

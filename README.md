@@ -2,7 +2,7 @@
 
 ## setting up
 
-### just run this commands
+### just run these commands
 
 1. pip install -r requirements.txt
 2. sudo apt-get install postgresql libpq-dev postgresql-client postgresql-client-common

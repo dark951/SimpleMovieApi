@@ -10,9 +10,7 @@ class CommentsSerializer(serializers.Serializer):
         fields = ('id', 'text', 'movie_id')
 
     def to_representation(self, instance):
-        representation = super(
-            CommentsSerializer, self
-        ).to_representation(instance)
+        representation = super().to_representation(instance)
 
         representation['text'] = instance.text
         representation['movie_id'] = instance.movie_id

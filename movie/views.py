@@ -14,6 +14,8 @@ from movie.helpers import get_movie_data
 from movie.models import Movie
 from movie.serializers import MoviesSerializer
 
+DATE_FROMAT = '%Y-%m-%d'
+
 
 class MoviesView(ModelViewSet):
     model = Movie
@@ -67,7 +69,7 @@ class TopView(APIView):
     @staticmethod
     def get_movie_ids_with_comment_count(start_date, end_date):
         movie_ids_form_comments = Comment.objects.filter(
-            created_at__gte=start_date, created_at__lte=end_date
+            created_at__range=[start_date, end_date]
         ).values_list('movie_id', flat=True)
 
         return sorted(
@@ -87,9 +89,8 @@ class TopView(APIView):
             )
 
         try:
-            date_format = '%Y-%m-%d'
-            start_date = datetime.datetime.strptime(start_date, date_format)
-            end_date = datetime.datetime.strptime(end_date, date_format)
+            start_date = datetime.datetime.strptime(start_date, DATE_FROMAT)
+            end_date = datetime.datetime.strptime(end_date, DATE_FROMAT)
         except ValueError:
             return Response(
                 {
